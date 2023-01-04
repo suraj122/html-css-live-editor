@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Editor from "./components/Editor";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    xml: '<center>\n  <img src="https://cutt.ly/JbMvJKT" />\n  <h1>Hello World!</h1>\n</center>',
+    css: "h1 {\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n}\nimg {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n}",
+  };
+
+  handleChange = (value, language) => {
+    this.setState({ [language]: value });
+  };
+
+  render() {
+    let { xml } = this.state;
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>Code Editor</h1>
+          <h2>You can write and preview HTML and CSS!</h2>
+        </header>
+        <Editor
+          language="xml"
+          value={xml}
+          displayLabel="html"
+          handleChange={this.handleChange}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
